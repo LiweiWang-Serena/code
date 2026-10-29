@@ -1,0 +1,27 @@
+# LeetCode 543. Diameter of Binary Tree (Easy)
+# Mock OA 2026-10-28: all tests passed
+# Time: 18:05
+#
+# 2. Data structures: tree
+# 3. Algorithm: recurrsion
+# 4. Time and space complexity: o(log(n)) o(n)
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        best = 0
+        def dfs(node):
+            nonlocal best
+            if not node:
+                return 0
+            l = dfs(node.left)
+            r = dfs(node.right)
+            best = max(best, l + r)
+            return 1 + max(l, r)
+        dfs(root)
+        return best
